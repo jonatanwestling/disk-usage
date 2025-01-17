@@ -1,0 +1,21 @@
+#Makefile for mdu
+CC = gcc
+CFLAGS = -g -std=gnu11 -Werror -Wall -Wextra -Wpedantic -Wmissing-declarations -Wmissing-prototypes -Wold-style-definition
+
+SRC = mdu_competition.c jstack.c
+OUT = mdu_competition.o jstack.o
+HDR = mdu.h jstack.h
+EXEC = mdu_competition
+
+.PHONY: all clean
+
+all: $(EXEC)
+
+$(EXEC): $(OUT)
+	$(CC) $(CFLAGS) -o $(EXEC) $(OUT) -lpthread
+
+$(OUT): $(SRC) $(HDR)
+	$(CC) $(CFLAGS) -c $(SRC)
+
+clean:
+	rm -f $(EXEC) $(OUT)
